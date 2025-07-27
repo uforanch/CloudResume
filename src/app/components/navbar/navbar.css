@@ -1,0 +1,9 @@
+.profile_container {
+    text-align: center;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* Fills the container while maintaining aspect ratio, cropping if necessary */
+}

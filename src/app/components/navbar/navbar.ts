@@ -8,7 +8,7 @@ import { Count } from '../../services/count';
   styleUrl: './navbar.css'
 })
 export class Navbar {
-  constructor(getCount: Count){}
-
-
+  private countService: Count;
+  constructor(countSerice: Count){this.countService = countSerice;}
+  getCount(){return this.countService.getCount()}
 }

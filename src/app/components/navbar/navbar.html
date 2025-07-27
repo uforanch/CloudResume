@@ -1,22 +1,29 @@
-<p> image goes here, centered</p>
-<p>name and stuff goes here</p>
-<p>visiter count goes here, centered</p>
+<div class="profile_container d-flex align-items-center justify-content-center">
+<img src="small.png" class="img-fluid rounded " style="max-width: 150px;">
+<div class="ms-3" style="text-align: left;" >
+<h4>Nathaniel Ince</h4> 
+<h6><span class="fw-light">Full Stack Software Developer</span></h6>
+    <a href="https://www.linkedin.com/in/nathaniel-ince-2856a415/"><i class="bi bi-linkedin"></i></a>
+    <a href="https://github.com/uforanch"><i class="bi bi-github"></i></a>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark">
+<p fw-lighter style="font-size: 0.8rem;">visiter count {{getCount()}}</p>
+</div>
+</div>
+<nav class="navbar navbar-expand navbar-light bg-secondary justify-content-center">
    
     <ul class="navbar-nav">
         <li>
-            <a class="nav-link mt-2 fs-5" routerLink="/socials">
-                Socials
+            <a class="nav-link fs-5 fw-bold" routerLink="/education">
+                Education
             </a>
         <li>
-            <a class="nav-link mt-2 fs-5" routerLink="/experience">
+            <a class="nav-link fs-5 fw-bold" routerLink="/experience">
                 Experience
             </a>
         </li>
         <li>
-            <a class="nav-link mt-2 fs-5" routerLink="/portfolio">
-                portfolio
+            <a class="nav-link fs-5 fw-bold" routerLink="/portfolio">
+                Portfolio
             </a>
         </li>
     </ul>
