@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class Count {
   private count = 0;
   constructor( http: HttpClient){
-    http.get(environment.apiUrl).subscribe(config=>{this.count = (config as {count:number}).count})
+    http.get(environment.apiUrl).subscribe(config=>{console.log(config); this.count = (config as {count:number}).count})
   }
-  get_Count(): number {return this.count;}
+  getCount(): number {return this.count;}
 }

@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import {Socials } from './components/socials/socials'
 import {Experience } from './components/experience/experience'
 import {Portfolio } from './components/portfolio/portfolio'
+import { Education } from './components/education/education';
 export const routes: Routes = [
-    {path:"socials", component:Socials},
+    {path:"education", component:Education},
     {path:"experience", component:Experience},
     {path:"portfolio", component:Portfolio},
-    {path:"", redirectTo:"/socials", pathMatch:"full"}
+    {path:"", redirectTo:"/education", pathMatch:"full"}
 ];

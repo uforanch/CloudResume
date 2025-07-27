@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+background-color: var(--bs-secondary) !important; 
+}
+
+a {
+    color : var(--bs-light) ;
+text-decoration: none;
+
+}
+a:hover{
+    color : var(--bs-light); 
+    text-decoration: underline;
+}
+
