@@ -4,10 +4,12 @@ import boto3
 client = boto3.client('dynamodb')
 dynamodb = boto3.resource("dynamodb")
 tableName = 'clouresumecounter'
-table = dynamodb.Table(tableName)
+dynamo_table = dynamodb.Table(tableName)
 
 
-def lambda_handler(event, context):
+def lambda_handler(event, context, table=None):
+    if table is None:
+        table = dynamo_table
     print(event)
     body = {}
     statusCode = 200
@@ -41,6 +43,7 @@ def lambda_handler(event, context):
     res = {
         "statusCode": statusCode,
         "headers": headers,
-        "body": body
+        "body": event
     }
+    print(res)
     return res
