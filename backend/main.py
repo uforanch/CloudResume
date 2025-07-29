@@ -3,8 +3,8 @@ import boto3
 
 client = boto3.client('dynamodb')
 dynamodb = boto3.resource("dynamodb")
-table = dynamodb.Table('http-crud-counter')
-tableName = 'http-crud-counter'
+tableName = 'clouresumecounter'
+table = dynamodb.Table(tableName)
 
 
 def lambda_handler(event, context):
