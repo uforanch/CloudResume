@@ -8,42 +8,40 @@ dynamo_table = dynamodb.Table(tableName)
 
 
 def lambda_handler(event, context, table=None):
-    if table is None:
-        table = dynamo_table
-    print(event)
-    body = {}
-    statusCode = 200
-    headers = {
-        "Content-Type": "application/json"
-    }
-
     try:
-        table.get_item(
-            Key={'id': 0})
-    except KeyError:
-        table.put_item(
-            Item={
-                'id': 0,
-                'count': 0
-            })
+        if table is None:
+            table = dynamo_table
+        print(event)
+        body = {}
+        statusCode = 200
+        headers = {
+            "Content-Type": "application/json"
+        }
 
-    try:
+        if "Item" not in table.get_item(Key={'id': 0}).keys():
+            table.put_item(
+                Item={
+                    'id': 0,
+                    'count': 0
+                })
+
+
         if event['routeKey'] == "GET /":
             body = table.get_item(
                 Key={'id': 0})
             body = body["Item"]
-            responseBody = [
-                {'id': body['id'], 'count': body['count']+1}]
+            responseBody = [{'id': body['id'], 'count': body['count']+1}]
             table.update_item(Key={'id':0}, AttributeUpdates={'count':{"Value":body['count']+1,"Action":"PUT"}})
-            body = responseBody
-    except KeyError:
+            body = {"count":str(body['count']+1)}
+    except Exception as e:
         statusCode = 400
-        body = 'Unsupported route: ' + event['routeKey']
+
+        body = str(e)
     body = json.dumps(body)
     res = {
         "statusCode": statusCode,
         "headers": headers,
-        "body": event
+        "body": body
     }
     print(res)
     return res

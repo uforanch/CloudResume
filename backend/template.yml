@@ -1,5 +1,5 @@
 Resources:
-  HelloWorldFunction:
+  CounterFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: application/
