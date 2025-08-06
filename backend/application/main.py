@@ -3,7 +3,7 @@ import boto3
 
 client = boto3.client('dynamodb')
 dynamodb = boto3.resource("dynamodb")
-tableName = 'clouresumecounter'
+tableName = 'cloudresumecounter'
 dynamo_table = dynamodb.Table(tableName)
 
 
