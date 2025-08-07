@@ -31,7 +31,7 @@ class TestLambdaHandler(unittest.TestCase):
         self.assertIn("statusCode", response)
         self.assertIn("body", response)
         response_body = json.loads(response["body"])
-        print(response_body)
+
         assert response_body["count"]=="1"
 
         response = lambda_handler(event, context, client=client)
@@ -40,6 +40,6 @@ class TestLambdaHandler(unittest.TestCase):
         self.assertIn("statusCode", response)
         self.assertIn("body", response)
         response_body = json.loads(response["body"])
-        print(response_body)
+
         assert response_body["count"]=="2"
 

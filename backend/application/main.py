@@ -47,5 +47,4 @@ def lambda_handler(event, context, client=None, tableName = 'cloudresumecounter'
         "headers": headers,
         "body": body
     }
-    print(res)
     return res
