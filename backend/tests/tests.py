@@ -1,7 +1,5 @@
 import json
 
-from six import assertCountEqual
-
 from application.main import lambda_handler
 from unittest.mock import patch, Mock
 import boto3
