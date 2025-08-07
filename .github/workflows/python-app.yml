@@ -38,4 +38,4 @@ jobs:
     - name: Test with pytest
       run: |
         cd backend
-        pytest tests/tests.py
+        PYTHONPATH=. pytest tests/tests.py
