@@ -1,41 +1,45 @@
 import json
 import boto3
 
-client = boto3.client('dynamodb')
-dynamodb = boto3.resource("dynamodb")
-tableName = 'cloudresumecounter'
-dynamo_table = dynamodb.Table(tableName)
 
 
-def lambda_handler(event, context, table=None):
+def lambda_handler(event, context, client=None, tableName = 'cloudresumecounter'):
     try:
-        if table is None:
-            table = dynamo_table
+        if client is None:
+            client = boto3.client('dynamodb', region_name="us-east-1")
         print(event)
         body = {}
         statusCode = 200
         headers = {
             "Content-Type": "application/json"
         }
-
-        if "Item" not in table.get_item(Key={'id': 0}).keys():
-            table.put_item(
+        print(client.get_item(TableName=tableName, Key={'id': {"N":"0"}}))
+        if "Item" not in client.get_item(TableName=tableName, Key={'id': {"N":"0"}}).keys():
+            client.put_item(
+                TableName=tableName,
                 Item={
-                    'id': 0,
-                    'count': 0
-                })
-
+                    'id': {"N": "0"},
+                    'count': {"N": "0"}
+                }
+            )
 
         if event['routeKey'] == "GET /":
-            body = table.get_item(
-                Key={'id': 0})
+            body = client.get_item(TableName=tableName, Key={'id': {"N":"0"}})
             body = body["Item"]
-            responseBody = [{'id': body['id'], 'count': body['count']+1}]
-            table.update_item(Key={'id':0}, AttributeUpdates={'count':{"Value":body['count']+1,"Action":"PUT"}})
-            body = {"count":str(body['count']+1)}
+            count = int(body['count']['N'])+1
+            client.update_item(
+                TableName=tableName,
+                Key={'id': {"N": "0"}},
+                AttributeUpdates={
+                    'count': {
+                        'Value': {"N": str(count)},
+                        'Action': 'PUT'
+                    }
+                }
+            )
+            body = {"count":str(count)}
     except Exception as e:
         statusCode = 400
-
         body = str(e)
     body = json.dumps(body)
     res = {
